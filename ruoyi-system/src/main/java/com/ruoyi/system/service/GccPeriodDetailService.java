@@ -20,5 +20,7 @@ public interface GccPeriodDetailService {
 
     Map<String,Object> getOccupationData();
 
+    List<Map<String,Object>> getPrediction();
+
 
 }

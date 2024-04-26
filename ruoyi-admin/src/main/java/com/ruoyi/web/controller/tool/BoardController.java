@@ -58,4 +58,9 @@ public class BoardController {
     public R occupationData() {
         return R.ok(gccPeriodDetailService.getOccupationData());
     }
+
+    @GetMapping("/prediction")
+    public R prediction() {
+        return R.ok(gccPeriodDetailService.getPrediction());
+    }
 }
