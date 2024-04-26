@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.GccPeriodDetailMapper">
+
+	<select id="getTotalSaleFeeGroupByMonth" resultType="java.util.Map">
+		SELECT
+			sum( total_sale_fee ) amount,`month`
+		FROM
+			gcc_period_detail
+		WHERE
+			1=1
+		GROUP BY
+			`month`
+		order by `month` desc
+			limit 10;
+	</select>
+	<select id="getTotalSaleFeeGroupByStation" resultType="java.util.Map">
+		SELECT
+			sum( total_sale_fee ) amount,`station_code`
+		FROM
+			gcc_period_detail
+		WHERE
+			1=1
+		GROUP BY
+			`station_id`
+
+	</select>
+	<select id="getTotalSaleFeeGroupByStationAndMonth" resultType="java.util.Map">
+		SELECT
+			sum( total_sale_fee) amount,`station_code`,`month`
+		FROM
+			gcc_period_detail
+		WHERE
+			1=1
+		GROUP BY
+			`station_id`,
+			`month`
+		having count(`month`) > 3
+	</select>
+	<select id="getAreaData" resultType="java.util.Map">
+		SELECT
+			city name, sum(con) value
+		from
+			ads_region_count
+		GROUP BY city
+		order by value desc
+	</select>
+	<select id="getYearData" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT
+			`month` name , con `value`
+		FROM
+			ads_date_count
+		where `year` = #{year}
+	</select>
+	<select id="getAgeData" resultType="java.util.Map">
+		SELECT
+			age_range `name`,con `value`
+		from
+			ads_age_range_count
+	</select>
+	<select id="getOccupationData" resultType="java.util.Map">
+		select *
+		from ads_user_info_count;
+	</select>
+</mapper>
