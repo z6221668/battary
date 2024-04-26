@@ -128,9 +128,10 @@ public class GccPeriodDetailServiceImpl implements GccPeriodDetailService {
 
         //查询去年数据和今年数据，今年没有的就添加
         for (Map<String, Object> lastYearDatum : lastYearData) {
-            if (!years.contains(lastYearDatum.get("name").toString())) {
+            String lastYearStr = lastYearDatum.get("name").toString().replace(lastYear,year);
+            if (!years.contains(lastYearStr)) {
                 Map<String, Object> map = new HashMap<>();
-                map.put("name", lastYearDatum.get("name").toString());
+                map.put("name",lastYearStr);
                 map.put("value", Integer.valueOf(lastYearDatum.get("value").toString()) + cz);
                 map.put("preFlag", 1);
                 nowYearData.add(map);
