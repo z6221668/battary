@@ -89,7 +89,7 @@ public class GccPeriodDetailServiceImpl implements GccPeriodDetailService {
                     if (name.equals(name1)) {
                         String[] value = jsonObject.getString("g").split(",");
                         map.put(name, value);
-                        continue;
+                        break;
                     }
                 }
             }
